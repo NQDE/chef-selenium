@@ -34,7 +34,6 @@ def selenium_windows_gui_service(name, exec, args, username)
   file cmd do
     content %("#{exec}" #{args.join(' ')})
     action :create
-    notifies :request_reboot, "reboot[Reboot to start #{name}]"
   end
 
   startup_path = "C:\\Users\\#{username}\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
