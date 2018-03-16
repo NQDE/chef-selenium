@@ -10,9 +10,6 @@ def config
     source 'node_config.erb'
     cookbook 'selenium'
     variables(resource: new_resource)
-    if platform_family?('windows')
-      notifies :request_reboot, "reboot[Reboot to start #{new_resource.servicename}]", :delayed
-    end
     notifies :restart, "service[#{new_resource.servicename}]", :delayed unless platform_family?('windows', 'mac_os_x')
     if platform_family?('mac_os_x')
       notifies :run, "execute[reload #{selenium_mac_domain(new_resource.servicename)}]",
